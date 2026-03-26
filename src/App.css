@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -83,6 +81,16 @@ select {
 .page {
   position: relative;
   z-index: 1;
+}
+
+.route-loading {
+  display: grid;
+  place-items: center;
+  min-height: 35vh;
+  color: var(--muted);
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 .glass-shell {

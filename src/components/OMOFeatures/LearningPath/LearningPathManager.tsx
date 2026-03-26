@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { LearningPath, LearningMaterial } from '@/types';
-import { learningPathService, materialService, progressService } from '@/services/api';
-import './LearningPath.css';
+import { learningPathService, materialService, progressService } from "@/services/api";
+import type { LearningMaterial, LearningPath } from "@/types";
+import type React from "react";
+import { useEffect, useState } from "react";
+import "./LearningPath.css";
 
 const LearningPathManager: React.FC<{ classId: string; studentId?: string }> = ({ classId, studentId }) => {
   const [path, setPath] = useState<LearningPath | null>(null);
@@ -9,42 +10,54 @@ const LearningPathManager: React.FC<{ classId: string; studentId?: string }> = (
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadLearningPath();
-  }, [classId]);
+    let isCancelled = false;
 
-  const loadLearningPath = async () => {
-    try {
-      setLoading(true);
-      const pathData = await learningPathService.getClassPath(classId);
-      setPath(pathData);
-      const materialsData = await materialService.getClassMaterials(classId);
-      setMaterials(materialsData.sort((a, b) => a.sequenceOrder - b.sequenceOrder));
-    } catch (error) {
-      console.error('Error loading learning path:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    const loadLearningPath = async () => {
+      try {
+        setLoading(true);
+        const pathData = await learningPathService.getClassPath(classId);
+        if (isCancelled) return;
+
+        setPath(pathData);
+        const materialsData = await materialService.getClassMaterials(classId);
+        if (isCancelled) return;
+
+        setMaterials(materialsData.sort((a, b) => a.sequenceOrder - b.sequenceOrder));
+      } catch (error) {
+        console.error("Error loading learning path:", error);
+      } finally {
+        if (!isCancelled) {
+          setLoading(false);
+        }
+      }
+    };
+
+    void loadLearningPath();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [classId]);
 
   const handleMaterialComplete = async (materialId: string, score?: number) => {
     if (!studentId) return;
     try {
       await progressService.markMaterialComplete(studentId, materialId, score);
     } catch (error) {
-      console.error('Error marking material complete:', error);
+      console.error("Error marking material complete:", error);
     }
   };
 
   const getMaterialIcon = (type: string) => {
     const icons: { [key: string]: string } = {
-      video: '🎥',
-      pdf: '📄',
-      link: '🔗',
-      h5p: '🎮',
-      scorm: '📦',
-      xapi: '📊',
+      video: "🎥",
+      pdf: "📄",
+      link: "🔗",
+      h5p: "🎮",
+      scorm: "📦",
+      xapi: "📊",
     };
-    return icons[type] || '📝';
+    return icons[type] || "📝";
   };
 
   if (loading) return <div className="learning-path-manager">Đang tải...</div>;
@@ -92,22 +105,18 @@ const LearningPathManager: React.FC<{ classId: string; studentId?: string }> = (
                 <h4>{material.title}</h4>
                 <p className="lp-material-type">{material.type.toUpperCase()}</p>
                 <p className="lp-material-criteria">
-                  ✓ Tiêu chí: {material.completionCriteria.type === 'score'
+                  ✓ Tiêu chí:{" "}
+                  {material.completionCriteria.type === "score"
                     ? `Điểm ≥ ${material.completionCriteria.value}%`
-                    : material.completionCriteria.type === 'time'
+                    : material.completionCriteria.type === "time"
                       ? `Xem ≥ ${material.completionCriteria.value} phút`
-                      : 'Xem toàn bộ'}
+                      : "Xem toàn bộ"}
                 </p>
                 {material.prerequisites && material.prerequisites.length > 0 && (
-                  <p className="lp-material-prereq">
-                    🔒 Yêu cầu: Hoàn thành các bài trước
-                  </p>
+                  <p className="lp-material-prereq">🔒 Yêu cầu: Hoàn thành các bài trước</p>
                 )}
               </div>
-              <button
-                onClick={() => handleMaterialComplete(material.id)}
-                className="lp-material-btn"
-              >
+              <button type="button" onClick={() => handleMaterialComplete(material.id)} className="lp-material-btn">
                 ▶️ Học
               </button>
             </div>

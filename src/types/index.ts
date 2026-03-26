@@ -20,7 +20,7 @@ export interface ClassSession {
   roomId: string;
   joinLink: string;
   recordingId?: string;
-  status: 'scheduled' | 'live' | 'completed' | 'cancelled';
+  status: "scheduled" | "live" | "completed" | "cancelled";
 }
 
 // Recording Types
@@ -29,10 +29,10 @@ export interface Recording {
   sessionId: string;
   filename: string;
   duration: number;
-  codec: 'H.264'; // High Profile, Level 4.1
-  audioCodec: 'Opus'; // 48 kHz
+  codec: "H.264"; // High Profile, Level 4.1
+  audioCodec: "Opus"; // 48 kHz
   bitrate: number; // 1.5-4.5 Mbps
-  resolution: '1080p' | '720p' | '480p';
+  resolution: "1080p" | "720p" | "480p";
   createdAt: Date;
   s3Path: string;
   hlsPlaylistUrl: string;
@@ -46,7 +46,7 @@ export interface Recording {
     userId: string;
     timestamp: string;
   };
-  accessLevel: 'private' | 'class' | 'public';
+  accessLevel: "private" | "class" | "public";
 }
 
 // Learning Material Types
@@ -54,13 +54,13 @@ export interface LearningMaterial {
   id: string;
   classId: string;
   title: string;
-  type: 'video' | 'pdf' | 'link' | 'h5p' | 'scorm' | 'xapi';
+  type: "video" | "pdf" | "link" | "h5p" | "scorm" | "xapi";
   content: string; // URL or embedded content
   sequenceOrder: number;
   duration?: number;
   prerequisites?: string[]; // Material IDs
   completionCriteria: {
-    type: 'view' | 'score' | 'time';
+    type: "view" | "score" | "time";
     value: number;
   };
   createdAt: Date;
@@ -79,9 +79,9 @@ export interface LearningPath {
 export interface LearningSequence {
   order: number;
   materialId: string;
-  type: 'lesson' | 'assignment' | 'quiz';
+  type: "lesson" | "assignment" | "quiz";
   unlockCondition?: {
-    type: 'previous_completed' | 'date' | 'score';
+    type: "previous_completed" | "date" | "score";
     value?: string | number;
   };
 }
@@ -92,7 +92,7 @@ export interface StudentProgress {
   studentId: string;
   classId: string;
   materialId: string;
-  status: 'not_started' | 'in_progress' | 'completed' | 'passed' | 'failed';
+  status: "not_started" | "in_progress" | "completed" | "passed" | "failed";
   startedAt?: Date;
   completedAt?: Date;
   score?: number;
@@ -135,7 +135,7 @@ export interface ChatMessage {
   senderId: string;
   content: string;
   timestamp: Date;
-  type: 'text' | 'image' | 'file';
+  type: "text" | "image" | "file";
 }
 
 export interface DirectMessage {
@@ -154,15 +154,15 @@ export interface User {
   email: string;
   fullName: string;
   avatar?: string;
-  role: 'student' | 'instructor' | 'admin' | 'parent';
+  role: "student" | "instructor" | "admin" | "parent";
   department?: string;
   createdAt: Date;
   lastLogin?: Date;
 }
 
 export interface AuthConfig {
-  type: 'sso' | 'oauth' | 'ldap' | 'saml';
-  provider: 'openid' | 'oauth2' | 'ldap' | 'saml2.0';
+  type: "sso" | "oauth" | "ldap" | "saml";
+  provider: "openid" | "oauth2" | "ldap" | "saml2.0";
   config: Record<string, unknown>;
 }
 
@@ -195,7 +195,7 @@ export interface Rule {
   id: string;
   classId: string;
   name: string;
-  trigger: 'event' | 'cron' | 'webhook';
+  trigger: "event" | "cron" | "webhook";
   condition: RuleCondition;
   action: RuleAction;
   enabled: boolean;
@@ -205,7 +205,7 @@ export interface Rule {
 export interface RuleCondition {
   type: string;
   field: string;
-  operator: 'equals' | 'greater' | 'less' | 'contains';
+  operator: "equals" | "greater" | "less" | "contains";
   value: unknown;
 }
 
@@ -223,15 +223,15 @@ export interface CalendarEvent {
   startTime: Date;
   endTime: Date;
   description: string;
-  type: 'session' | 'deadline' | 'exam';
-  syncCalendars: ('google' | 'outlook')[];
+  type: "session" | "deadline" | "exam";
+  syncCalendars: ("google" | "outlook")[];
 }
 
 // Video Conference Types
 export interface ConferenceRoom {
   id: string;
   classId: string;
-  provider: 'zoom' | 'teams' | 'jitsi' | 'google-meet';
+  provider: "zoom" | "teams" | "jitsi" | "google-meet";
   externalRoomId: string;
   joinUrl: string;
   createdAt: Date;
@@ -242,7 +242,7 @@ export interface ClassEnrollment {
   id: string;
   classId: string;
   studentId: string;
-  status: 'pending' | 'approved' | 'rejected' | 'active' | 'dropped';
+  status: "pending" | "approved" | "rejected" | "active" | "dropped";
   enrolledAt: Date;
   approvedAt?: Date;
   approvedBy?: string;

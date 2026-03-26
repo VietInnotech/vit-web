@@ -31,8 +31,8 @@ function Hero() {
         <div className="text-section">
           <h2 className="text-title">Tiên phong trong lĩnh vực chuyển đổi số giáo dục</h2>
           <p className="text-description">
-            Giải pháp phần mềm giáo dục chuyên nghiệp: Phòng học tích hợp OMO, quản lý học tập,
-            và các giải pháp tích hợp dành cho trường đại học, trường cao đẳng và các cơ sở giáo dục.
+            Giải pháp phần mềm giáo dục chuyên nghiệp: Phòng học tích hợp OMO, quản lý học tập, và các giải pháp tích
+            hợp dành cho trường đại học, trường cao đẳng và các cơ sở giáo dục.
           </p>
         </div>
       </div>

@@ -1,9 +1,9 @@
 import "@/components/Overview/Overview.css";
+import about1 from "@/assets/about/1-removebg-preview.png";
+import about2 from "@/assets/about/1-removebg-preview.png";
+import about3 from "@/assets/about/1-removebg-preview.png";
+import about4 from "@/assets/about/1-removebg-preview.png";
 import InformationCard from "./InformationCard";
-import about1 from "@/assets/about/1-removebg-preview.png"
-import about2 from "@/assets/about/1-removebg-preview.png"
-import about3 from "@/assets/about/1-removebg-preview.png"
-import about4 from "@/assets/about/1-removebg-preview.png"
 
 function Overview() {
   return (

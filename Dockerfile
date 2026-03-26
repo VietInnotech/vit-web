@@ -17,8 +17,6 @@ FROM nginx:1.25.3-alpine-slim
 
 COPY --from=builder /usr/src/build/dist /usr/share/nginx/html
 
-RUN rm /etc/nginx/conf.d/default.conf
-
-COPY deploy/nginx/nginx.conf /etc/nginx/templates/default.conf.template
+COPY deploy/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80

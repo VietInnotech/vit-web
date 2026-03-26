@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { User, AuditLog } from '@/types';
-import { authService, auditService } from '@/services/api';
-import './Dashboard.css';
+import { auditService, authService } from "@/services/api";
+import type { AuditLog, User } from "@/types";
+import type React from "react";
+import { useEffect, useState } from "react";
+import "./Dashboard.css";
 
 const OMODashboard: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -35,17 +36,17 @@ const OMODashboard: React.FC = () => {
         recordingHours: 28,
       });
     } catch (error) {
-      console.error('Error loading dashboard:', error);
+      console.error("Error loading dashboard:", error);
     }
   };
 
   const handleLogout = async () => {
     try {
       await authService.logout();
-      localStorage.removeItem('token');
-      window.location.href = '/';
+      localStorage.removeItem("token");
+      window.location.href = "/";
     } catch (error) {
-      console.error('Error logging out:', error);
+      console.error("Error logging out:", error);
     }
   };
 
@@ -53,14 +54,14 @@ const OMODashboard: React.FC = () => {
     <div className="omo-dashboard">
       <div className="dashboard-header">
         <div className="dashboard-user">
-          <div className="user-avatar">
-            {currentUser?.fullName.charAt(0) || 'U'}
-          </div>
+          <div className="user-avatar">{currentUser?.fullName.charAt(0) || "U"}</div>
           <div className="user-info">
-            <h2>{currentUser?.fullName || 'Người Dùng'}</h2>
-            <p>{currentUser?.role === 'instructor' ? '👨‍🏫 Giảng Viên' : '👨‍🎓 Học Viên'}</p>
+            <h2>{currentUser?.fullName || "Người Dùng"}</h2>
+            <p>{currentUser?.role === "instructor" ? "👨‍🏫 Giảng Viên" : "👨‍🎓 Học Viên"}</p>
           </div>
-          <button onClick={handleLogout} className="dashboard-logout">Đăng Xuất</button>
+          <button type="button" onClick={handleLogout} className="dashboard-logout">
+            Đăng Xuất
+          </button>
         </div>
       </div>
 
@@ -137,16 +138,14 @@ const OMODashboard: React.FC = () => {
               <div key={log.id} className="audit-item">
                 <div className="audit-action">{log.action}</div>
                 <div className="audit-resource">{log.resource}</div>
-                <div className="audit-time">
-                  {new Date(log.timestamp).toLocaleString('vi-VN')}
-                </div>
+                <div className="audit-time">{new Date(log.timestamp).toLocaleString("vi-VN")}</div>
               </div>
             ))}
-            {auditLogs.length === 0 && (
-              <p className="no-logs">Chưa có hoạt động nào</p>
-            )}
+            {auditLogs.length === 0 && <p className="no-logs">Chưa có hoạt động nào</p>}
           </div>
-          <button className="view-all-logs">Xem tất cả → </button>
+          <button type="button" className="view-all-logs">
+            Xem tất cả →
+          </button>
         </div>
       </div>
 

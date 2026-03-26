@@ -1,6 +1,6 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import type React from "react";
 import { Link } from "react-router-dom";
 import "./SanPham.css";
 
@@ -18,9 +18,7 @@ const SanPham: React.FC = () => {
         <div className="section-copy">
           <p className="section-kicker">Sản phẩm</p>
           <h1 className="section-title">Giải pháp chính của Vietinnotech</h1>
-          <p className="section-description">
-            Giải pháp phần mềm giáo dục tiên tiến của Vietinnotech.
-          </p>
+          <p className="section-description">Giải pháp phần mềm giáo dục tiên tiến của Vietinnotech.</p>
         </div>
       </section>
 

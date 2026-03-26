@@ -29,6 +29,19 @@ bun run build
 bun run preview
 ```
 
+Chạy bằng Docker Compose
+1. Build và khởi động container:
+
+```bash
+docker compose up --build
+```
+
+2. Mở ứng dụng tại:
+
+```text
+http://localhost:8080
+```
+
 Về tài liệu (PDF) và `public/catalog`
 - Thư mục `public/catalog` chứa các tập tin brochure / catalogue (ví dụ PDF) và sẽ được phục vụ tĩnh bởi Vite tại đường dẫn `/catalog/...`.
 - `.gitignore` hiện không chặn `public/catalog`, nên để đẩy các PDF lên remote bạn chỉ cần thêm (git add/commit) thư mục đó.

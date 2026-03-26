@@ -40,9 +40,8 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 32px;
 }
-.info-cards-content .img{
+.info-cards-content .img {
   width: 10%;
-
 }
 .info-cards {
   height: auto;

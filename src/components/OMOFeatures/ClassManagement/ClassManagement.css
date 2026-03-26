@@ -116,12 +116,12 @@
   font-weight: 600;
 }
 
-.form-buttons button[type='submit'] {
+.form-buttons button[type="submit"] {
   background: #6033ff;
   color: white;
 }
 
-.form-buttons button[type='button'] {
+.form-buttons button[type="button"] {
   background: #ddd;
   color: #333;
 }

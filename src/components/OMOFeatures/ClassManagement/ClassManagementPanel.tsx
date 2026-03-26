@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Class, ClassEnrollment } from '@/types';
-import { classService, enrollmentService } from '@/services/api';
-import './ClassManagement.css';
+import { classService, enrollmentService } from "@/services/api";
+import type { Class, ClassEnrollment } from "@/types";
+import type React from "react";
+import { useEffect, useState } from "react";
+import "./ClassManagement.css";
 
 const ClassManagementPanel: React.FC<{ instructorId?: string }> = ({ instructorId }) => {
   const [classes, setClasses] = useState<Class[]>([]);
@@ -9,11 +10,11 @@ const ClassManagementPanel: React.FC<{ instructorId?: string }> = ({ instructorI
   const [showNewClassForm, setShowNewClassForm] = useState(false);
   const [selectedClass, setSelectedClass] = useState<Class | null>(null);
   const [formData, setFormData] = useState({
-    name: '',
-    code: '',
-    description: '',
-    semester: '',
-    department: '',
+    name: "",
+    code: "",
+    description: "",
+    semester: "",
+    department: "",
   });
 
   useEffect(() => {
@@ -28,7 +29,7 @@ const ClassManagementPanel: React.FC<{ instructorId?: string }> = ({ instructorI
       const data = await classService.getInstructorClasses(instructorId);
       setClasses(data);
     } catch (error) {
-      console.error('Error loading classes:', error);
+      console.error("Error loading classes:", error);
     }
   };
 
@@ -37,7 +38,7 @@ const ClassManagementPanel: React.FC<{ instructorId?: string }> = ({ instructorI
       const data = await enrollmentService.getEnrollmentRequests(classId);
       setEnrollmentRequests(data);
     } catch (error) {
-      console.error('Error loading enrollment requests:', error);
+      console.error("Error loading enrollment requests:", error);
     }
   };
 
@@ -55,10 +56,10 @@ const ClassManagementPanel: React.FC<{ instructorId?: string }> = ({ instructorI
         department: formData.department,
       });
       setClasses([...classes, newClass]);
-      setFormData({ name: '', code: '', description: '', semester: '', department: '' });
+      setFormData({ name: "", code: "", description: "", semester: "", department: "" });
       setShowNewClassForm(false);
     } catch (error) {
-      console.error('Error creating class:', error);
+      console.error("Error creating class:", error);
     }
   };
 
@@ -68,7 +69,7 @@ const ClassManagementPanel: React.FC<{ instructorId?: string }> = ({ instructorI
       await enrollmentService.approveEnrollment(enrollmentId, instructorId);
       setEnrollmentRequests(enrollmentRequests.filter((e) => e.id !== enrollmentId));
     } catch (error) {
-      console.error('Error approving enrollment:', error);
+      console.error("Error approving enrollment:", error);
     }
   };
 
@@ -86,6 +87,7 @@ const ClassManagementPanel: React.FC<{ instructorId?: string }> = ({ instructorI
 
       <div className="cm-tabs">
         <button
+          type="button"
           className="cm-tab active"
           onClick={() => {
             setSelectedClass(null);
@@ -95,7 +97,7 @@ const ClassManagementPanel: React.FC<{ instructorId?: string }> = ({ instructorI
           📚 Danh Sách Lớp
         </button>
         {selectedClass && (
-          <button className="cm-tab active">
+          <button type="button" className="cm-tab active">
             ✋ Duyệt Tham Gia ({enrollmentRequests.length})
           </button>
         )}
@@ -103,7 +105,7 @@ const ClassManagementPanel: React.FC<{ instructorId?: string }> = ({ instructorI
 
       {!selectedClass ? (
         <div className="cm-classes">
-          <button onClick={() => setShowNewClassForm(!showNewClassForm)} className="cm-btn-new">
+          <button type="button" onClick={() => setShowNewClassForm(!showNewClassForm)} className="cm-btn-new">
             + Tạo Lớp Mới
           </button>
 
@@ -148,7 +150,9 @@ const ClassManagementPanel: React.FC<{ instructorId?: string }> = ({ instructorI
               />
               <div className="form-buttons">
                 <button type="submit">Tạo Lớp</button>
-                <button type="button" onClick={() => setShowNewClassForm(false)}>Hủy</button>
+                <button type="button" onClick={() => setShowNewClassForm(false)}>
+                  Hủy
+                </button>
               </div>
             </form>
           )}
@@ -158,12 +162,15 @@ const ClassManagementPanel: React.FC<{ instructorId?: string }> = ({ instructorI
               <div key={cls.id} className="cm-class-card">
                 <div className="cm-class-info">
                   <h3>{cls.name}</h3>
-                  <p className="cm-class-code">📝 Mã lớp: <strong>{cls.code}</strong></p>
+                  <p className="cm-class-code">
+                    📝 Mã lớp: <strong>{cls.code}</strong>
+                  </p>
                   <p className="cm-class-detail">📅 Học kỳ: {cls.semester}</p>
                   <p className="cm-class-detail">🏢 Bộ môn: {cls.department}</p>
                   <p className="cm-class-desc">{cls.description}</p>
                 </div>
                 <button
+                  type="button"
                   onClick={() => {
                     setSelectedClass(cls);
                     loadEnrollmentRequests(cls.id);
@@ -184,7 +191,7 @@ const ClassManagementPanel: React.FC<{ instructorId?: string }> = ({ instructorI
         </div>
       ) : (
         <div className="cm-class-detail-view">
-          <button onClick={() => setSelectedClass(null)} className="cm-back-btn">
+          <button type="button" onClick={() => setSelectedClass(null)} className="cm-back-btn">
             ← Quay Lại
           </button>
 
@@ -200,18 +207,21 @@ const ClassManagementPanel: React.FC<{ instructorId?: string }> = ({ instructorI
             ) : (
               <div className="cm-requests">
                 {enrollmentRequests
-                  .filter((e) => e.status === 'pending')
+                  .filter((e) => e.status === "pending")
                   .map((request) => (
                     <div key={request.id} className="cm-request-item">
                       <span>Học viên ID: {request.studentId}</span>
                       <div className="cm-request-buttons">
                         <button
+                          type="button"
                           onClick={() => handleApproveEnrollment(request.id)}
                           className="cm-approve-btn"
                         >
                           ✅ Duyệt
                         </button>
-                        <button className="cm-reject-btn">❌ Từ Chối</button>
+                        <button type="button" className="cm-reject-btn">
+                          ❌ Từ Chối
+                        </button>
                       </div>
                     </div>
                   ))}

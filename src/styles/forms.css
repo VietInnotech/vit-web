@@ -12,7 +12,9 @@
   font-size: 16px;
   color: #222;
 }
-.form-textarea { min-height: 120px; }
+.form-textarea {
+  min-height: 120px;
+}
 .form-btn {
   display: inline-block;
   padding: 10px 18px;
@@ -23,7 +25,14 @@
   cursor: pointer;
   font-family: "Rubik", sans-serif;
 }
-.form-btn:hover { opacity: 0.95; }
+.form-btn:hover {
+  opacity: 0.95;
+}
 
 /* Helper to align simple inline form groups */
-.form-row { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+.form-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}

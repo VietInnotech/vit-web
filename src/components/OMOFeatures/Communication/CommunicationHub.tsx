@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { ChatMessage } from '@/types';
-import { communicationService, conferenceService } from '@/services/api';
-import './Communication.css';
+import { communicationService, conferenceService } from "@/services/api";
+import type { ChatMessage } from "@/types";
+import type React from "react";
+import { useState } from "react";
+import "./Communication.css";
 
 const CommunicationHub: React.FC<{ classId: string; userId: string }> = ({ classId, userId }) => {
-  const [activeTab, setActiveTab] = useState<'chat' | 'forum' | 'conference'>('chat');
+  const [activeTab, setActiveTab] = useState<"chat" | "forum" | "conference">("chat");
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
-  const [newMessage, setNewMessage] = useState('');
-  const [conferenceUrl, setConferenceUrl] = useState<string>('');
+  const [newMessage, setNewMessage] = useState("");
+  const [conferenceUrl, setConferenceUrl] = useState<string>("");
 
   const handleSendChat = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,28 +19,28 @@ const CommunicationHub: React.FC<{ classId: string; userId: string }> = ({ class
         classId,
         senderId: userId,
         content: newMessage,
-        type: 'text',
+        type: "text",
       });
       setChatMessages([...chatMessages, message]);
-      setNewMessage('');
+      setNewMessage("");
     } catch (error) {
-      console.error('Error sending message:', error);
+      console.error("Error sending message:", error);
     }
   };
 
-  const handleJoinConference = async (provider: 'zoom' | 'teams' | 'jitsi' | 'google-meet') => {
+  const handleJoinConference = async (provider: "zoom" | "teams" | "jitsi" | "google-meet") => {
     try {
       const room = await conferenceService.createConferenceRoom({
         classId,
         provider,
         externalRoomId: `${provider}-${Date.now()}`,
-        joinUrl: '',
+        joinUrl: "",
       });
       const joinUrl = await conferenceService.getConferenceJoinUrl(room.id, userId);
       setConferenceUrl(joinUrl);
-      window.open(joinUrl, '_blank');
+      window.open(joinUrl, "_blank");
     } catch (error) {
-      console.error('Error joining conference:', error);
+      console.error("Error joining conference:", error);
     }
   };
 
@@ -52,32 +53,35 @@ const CommunicationHub: React.FC<{ classId: string; userId: string }> = ({ class
 
       <div className="comm-tabs">
         <button
-          className={`comm-tab ${activeTab === 'chat' ? 'active' : ''}`}
-          onClick={() => setActiveTab('chat')}
+          type="button"
+          className={`comm-tab ${activeTab === "chat" ? "active" : ""}`}
+          onClick={() => setActiveTab("chat")}
         >
           💬 Chat Thời Gian Thực
         </button>
         <button
-          className={`comm-tab ${activeTab === 'forum' ? 'active' : ''}`}
-          onClick={() => setActiveTab('forum')}
+          type="button"
+          className={`comm-tab ${activeTab === "forum" ? "active" : ""}`}
+          onClick={() => setActiveTab("forum")}
         >
           📋 Diễn Đàn
         </button>
         <button
-          className={`comm-tab ${activeTab === 'conference' ? 'active' : ''}`}
-          onClick={() => setActiveTab('conference')}
+          type="button"
+          className={`comm-tab ${activeTab === "conference" ? "active" : ""}`}
+          onClick={() => setActiveTab("conference")}
         >
           🎥 Họp Trực Tuyến
         </button>
       </div>
 
-      {activeTab === 'chat' && (
+      {activeTab === "chat" && (
         <div className="comm-chat">
           <div className="chat-messages">
             {chatMessages.map((msg) => (
-              <div key={msg.id} className={`chat-message ${msg.senderId === userId ? 'own' : 'other'}`}>
+              <div key={msg.id} className={`chat-message ${msg.senderId === userId ? "own" : "other"}`}>
                 <div className="chat-bubble">{msg.content}</div>
-                <span className="chat-time">{new Date(msg.timestamp).toLocaleTimeString('vi-VN')}</span>
+                <span className="chat-time">{new Date(msg.timestamp).toLocaleTimeString("vi-VN")}</span>
               </div>
             ))}
           </div>
@@ -89,12 +93,14 @@ const CommunicationHub: React.FC<{ classId: string; userId: string }> = ({ class
               placeholder="Nhập tin nhắn..."
               className="chat-input"
             />
-            <button type="submit" className="chat-send-btn">Gửi</button>
+            <button type="submit" className="chat-send-btn">
+              Gửi
+            </button>
           </form>
         </div>
       )}
 
-      {activeTab === 'forum' && (
+      {activeTab === "forum" && (
         <div className="comm-forum">
           <div className="forum-feature">
             <h3>📋 Diễn Đàn Theo Chủ Đề</h3>
@@ -117,26 +123,26 @@ const CommunicationHub: React.FC<{ classId: string; userId: string }> = ({ class
         </div>
       )}
 
-      {activeTab === 'conference' && (
+      {activeTab === "conference" && (
         <div className="comm-conference">
           <div className="conference-header">
             <h3>🎥 Họp Trực Tuyến Tích Hợp</h3>
             <p>Hỗ trợ thảo luận nhóm và project-based learning</p>
           </div>
           <div className="conference-providers">
-            <button onClick={() => handleJoinConference('zoom')} className="provider-btn zoom">
+            <button type="button" onClick={() => handleJoinConference("zoom")} className="provider-btn zoom">
               <span className="provider-icon">🔘</span>
               <span className="provider-name">Zoom</span>
             </button>
-            <button onClick={() => handleJoinConference('teams')} className="provider-btn teams">
+            <button type="button" onClick={() => handleJoinConference("teams")} className="provider-btn teams">
               <span className="provider-icon">💼</span>
               <span className="provider-name">Microsoft Teams</span>
             </button>
-            <button onClick={() => handleJoinConference('google-meet')} className="provider-btn google">
+            <button type="button" onClick={() => handleJoinConference("google-meet")} className="provider-btn google">
               <span className="provider-icon">📹</span>
               <span className="provider-name">Google Meet</span>
             </button>
-            <button onClick={() => handleJoinConference('jitsi')} className="provider-btn jitsi">
+            <button type="button" onClick={() => handleJoinConference("jitsi")} className="provider-btn jitsi">
               <span className="provider-icon">🎭</span>
               <span className="provider-name">Jitsi Meet</span>
             </button>

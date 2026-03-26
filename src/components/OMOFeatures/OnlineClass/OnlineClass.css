@@ -61,12 +61,12 @@
   font-weight: 600;
 }
 
-.oc-form button[type='submit'] {
+.oc-form button[type="submit"] {
   background: #6033ff;
   color: white;
 }
 
-.oc-form button[type='button'] {
+.oc-form button[type="button"] {
   background: #ddd;
   color: #333;
 }

@@ -1,4 +1,3 @@
-
 function InformationCard(props: any) {
   return (
     <div className="info-cards">

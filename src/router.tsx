@@ -1,11 +1,13 @@
-import NotFound from "@/pages/NotFound";
-import SanPham from "@/pages/SanPham";
-import PhongHocOMO from "@/pages/PhongHocOMO";
-import PhanMemOMO from "@/pages/PhanMemOMO";
-import LienHe from "@/pages/LienHe";
-import Home from "@/pages/Home";
 import Layout from "@/components/Layout/Layout";
+import Home from "@/pages/Home";
+import NotFound from "@/pages/NotFound";
+import { lazy } from "react";
 import { Navigate, createBrowserRouter } from "react-router-dom";
+
+const SanPham = lazy(() => import("@/pages/SanPham"));
+const PhongHocOMO = lazy(() => import("@/pages/PhongHocOMO"));
+const PhanMemOMO = lazy(() => import("@/pages/PhanMemOMO"));
+const LienHe = lazy(() => import("@/pages/LienHe"));
 
 export const router = createBrowserRouter([
   {
