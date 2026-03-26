@@ -1,20 +1,19 @@
-FROM node:20-alpine AS builder
+FROM oven/bun:1.3.11-alpine AS builder
 
 WORKDIR /usr/src/build
 
-COPY . .
+COPY package.json bun.lock ./
 
-# build
-RUN yarn install --frozen-lockfile --ignore-scripts
-RUN yarn build
-
-# remove devDependencies
-RUN yarn install --production=true --frozen-lockfile --ignore-scripts
-
-FROM nginx:1.25.3-alpine-slim
+RUN bun install --frozen-lockfile --ignore-scripts
 
 ARG VITE_API_BASE_URL
 ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
+
+COPY . .
+
+RUN bun run build
+
+FROM nginx:1.25.3-alpine-slim
 
 COPY --from=builder /usr/src/build/dist /usr/share/nginx/html
 

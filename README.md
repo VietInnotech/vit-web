@@ -1,35 +1,32 @@
 Tài liệu ngắn để chạy và phát triển dự án trên máy local.
 
 Yêu cầu trước khi bắt đầu
-- Node.js (16+) và npm hoặc pnpm
+- Bun 1.3+
 - Git (nếu bạn muốn đẩy mã lên remote)
 
 Cài đặt và chạy
 1. Cài dependencies:
 
 ```bash
-npm install
-# hoặc dùng pnpm
-pnpm install
+bun install
 ```
 
 2. Chạy server phát triển (hot-reload):
 
 ```bash
-npm run dev
-# hoặc pnpm dev
+bun run dev
 ```
 
 3. Build production:
 
 ```bash
-npm run build
+bun run build
 ```
 
 4. Xem bản build tĩnh:
 
 ```bash
-npm run preview
+bun run preview
 ```
 
 Về tài liệu (PDF) và `public/catalog`
@@ -56,8 +53,8 @@ Gợi ý UI/UX và cấu trúc
 - Menu sản phẩm liên kết tới các route trong `src/router.tsx` (ví dụ `/san-pham/telemed-ris`).
 
 Gặp lỗi TypeScript/Build
-- Chạy `npm run build` để kiểm tra lỗi TypeScript trước khi commit.
-- Nếu gặp lỗi thiếu dependency, cài thêm package tương ứng rồi chạy lại `npm install`.
+- Chạy `bun run build` để kiểm tra lỗi TypeScript trước khi commit.
+- Nếu gặp lỗi thiếu dependency, cài thêm package tương ứng rồi chạy lại `bun install`.
 
 Liên hệ
 - Nếu cần tôi sửa README chi tiết hơn (cách deploy Docker, CI, v.v.), nói tôi biết.

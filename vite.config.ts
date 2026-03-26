@@ -8,6 +8,6 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     strictPort: true,
-    port: 5000,
+    port: 5555,
   },
 });

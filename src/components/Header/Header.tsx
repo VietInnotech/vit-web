@@ -2,7 +2,7 @@ import "@/components/Header/Header.css";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "assets/logo.png";
 
 export default function Header() {
@@ -10,64 +10,101 @@ export default function Header() {
   const toggleNav = () => setNavOpen((s) => !s);
 
   return (
-    <div className="navbar-section">
-      <div className="navbar-title">
-        <Link to="/">
-          <div className="navbar-brand">
-            <img src={logo} alt="Logo Vietinnotech" className="navbar-logo" />
-            <div className="navbar-company-name">CÔNG TY CỔ PHẦN VIETINNOTECH</div>
+    <header className="navbar-section glass-shell">
+      <Link to="/" className="navbar-title" aria-label="Vietinnotech trang chủ">
+        <div className="navbar-brand">
+          <img src={logo} alt="Logo Vietinnotech" className="navbar-logo" />
+          <div>
+            <div className="navbar-company-name">VIETINNOTECH</div>
+            <div className="navbar-company-tag">CÔNG TY CỔ PHẦN VIETINNOTECH</div>
           </div>
+        </div>
+      </Link>
+
+      <nav className="navbar-nav" aria-label="Điều hướng chính">
+        <ul className="navbar-items">
+          <li>
+            <NavLink to="/" end className={({ isActive }) => `navbar-links${isActive ? " is-active" : ""}`}>
+              Trang chủ
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/san-pham/phong-hoc-omo"
+              className={({ isActive }) => `navbar-links${isActive ? " is-active" : ""}`}
+            >
+              Giải pháp OMO
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/phan-mem-omo"
+              className={({ isActive }) => `navbar-links${isActive ? " is-active" : ""}`}
+            >
+              Phần mềm OMO
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/lien-he"
+              className={({ isActive }) => `navbar-links${isActive ? " is-active" : ""}`}
+            >
+              Liên hệ
+            </NavLink>
+          </li>
+        </ul>
+      </nav>
+
+      <div className="navbar-cta">
+        <Link to="/lien-he" className="navbar-btn">
+          Nhận tư vấn
         </Link>
       </div>
 
-      {/* Desktop */}
-      <ul className="navbar-items">
-        <li>
-          <Link to="/san-pham/phong-hoc-omo" className="navbar-links">
-            Giải pháp OMO
-          </Link>
-        </li>
-        <li>
-          <Link to="/phan-mem-omo" className="navbar-links">
-            Phần Mềm OMO
-          </Link>
-        </li>
-        <li>
-          <Link to="/lien-he" className="navbar-links">
-            Liên Hệ
-          </Link>
-        </li>
-      </ul>
+      <button type="button" onClick={toggleNav} className="mobile-nav" aria-label="Mở menu">
+        <FontAwesomeIcon icon={faBars} className="hamb-icon" />
+      </button>
 
-      {/* Mobile */}
-      <div className={navOpen ? "mobile-navbar open-nav" : "mobile-navbar"}>
-        <div onClick={toggleNav} className="mobile-navbar-close">
-          <FontAwesomeIcon icon={faXmark} className="hamb-icon" />
+      <div className={navOpen ? "mobile-navbar open-nav glass-shell-strong" : "mobile-navbar"}>
+        <div className="mobile-navbar-top">
+          <Link to="/" className="navbar-title" onClick={toggleNav}>
+            <div className="navbar-brand">
+              <img src={logo} alt="Logo Vietinnotech" className="navbar-logo" />
+              <div>
+                <div className="navbar-company-name">VIETINNOTECH</div>
+                <div className="navbar-company-tag">CÔNG TY CỔ PHẦN VIETINNOTECH</div>
+              </div>
+            </div>
+          </Link>
+
+          <button type="button" onClick={toggleNav} className="mobile-navbar-close" aria-label="Đóng menu">
+            <FontAwesomeIcon icon={faXmark} className="hamb-icon" />
+          </button>
         </div>
 
         <ul className="mobile-navbar-links">
           <li>
-            <Link onClick={toggleNav} to="/san-pham/phong-hoc-omo">
+            <NavLink onClick={toggleNav} to="/" end className={({ isActive }) => (isActive ? "is-active" : "")}>
+              Trang chủ
+            </NavLink>
+          </li>
+          <li>
+            <NavLink onClick={toggleNav} to="/san-pham/phong-hoc-omo" className={({ isActive }) => (isActive ? "is-active" : "")}>
               Giải pháp OMO
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link onClick={toggleNav} to="/phan-mem-omo">
-              Phần Mềm OMO
-            </Link>
+            <NavLink onClick={toggleNav} to="/phan-mem-omo" className={({ isActive }) => (isActive ? "is-active" : "")}>
+              Phần mềm OMO
+            </NavLink>
           </li>
           <li>
-            <Link onClick={toggleNav} to="/lien-he">
-              Liên Hệ
-            </Link>
+            <NavLink onClick={toggleNav} to="/lien-he" className={({ isActive }) => (isActive ? "is-active" : "")}>
+              Liên hệ
+            </NavLink>
           </li>
         </ul>
       </div>
-
-      {/* Hamburger Icon */}
-      <div className="mobile-nav">
-        <FontAwesomeIcon icon={faBars} onClick={toggleNav} className="hamb-icon" />
-      </div>
-    </div>
+    </header>
   );
 }

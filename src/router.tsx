@@ -3,6 +3,7 @@ import SanPham from "@/pages/SanPham";
 import PhongHocOMO from "@/pages/PhongHocOMO";
 import PhanMemOMO from "@/pages/PhanMemOMO";
 import LienHe from "@/pages/LienHe";
+import Home from "@/pages/Home";
 import Layout from "@/components/Layout/Layout";
 import { Navigate, createBrowserRouter } from "react-router-dom";
 
@@ -11,7 +12,7 @@ export const router = createBrowserRouter([
     path: "/",
     element: <Layout />,
     children: [
-      { index: true, element: <PhongHocOMO /> },
+      { index: true, element: <Home /> },
       { path: "san-pham", element: <SanPham /> },
       { path: "san-pham/phong-hoc-omo", element: <PhongHocOMO /> },
       { path: "phan-mem-omo", element: <PhanMemOMO /> },
