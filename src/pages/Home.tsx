@@ -1,17 +1,13 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRight,
-  faCircleCheck,
-  faLocationDot,
-  faPhone,
-} from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 import partner1 from "@/assets/partners/partner-1.png";
 import partner2 from "@/assets/partners/partner2.png";
 import partner3 from "@/assets/partners/partner3.png";
 import partner4 from "@/assets/partners/partner4.png";
 import partner5 from "@/assets/partners/partner5.png";
 import partner6 from "@/assets/partners/partner6.png";
+import Reveal from "@/components/Reveal/Reveal";
+import { faArrowRight, faLocationDot, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 import "./Home.css";
 
 const overviewItems = [
@@ -38,6 +34,7 @@ const overviewItems = [
 ];
 
 const partners = [partner1, partner2, partner3, partner4, partner5, partner6];
+const partnerLoop = [...partners, ...partners];
 
 function Home() {
   return (
@@ -47,12 +44,12 @@ function Home() {
         <div className="home-orb home-orb--purple" />
 
         <div className="home-container home-hero__inner">
-          <div className="home-hero__copy glass-shell">
+          <Reveal className="home-hero__copy glass-shell">
             <p className="section-kicker">Giải pháp giáo dục số</p>
             <h1 className="home-title">Tiên phong trong lĩnh vực chuyển đổi số giáo dục</h1>
             <p className="home-lead">
-              Giải pháp phần mềm giáo dục chuyên nghiệp: Phòng học tích hợp OMO, quản lý học tập,
-              và các giải pháp tích hợp dành cho trường đại học, trường cao đẳng và các cơ sở giáo dục.
+              Giải pháp phần mềm giáo dục chuyên nghiệp: Phòng học tích hợp OMO, quản lý học tập, và các giải pháp tích
+              hợp dành cho trường đại học, trường cao đẳng và các cơ sở giáo dục.
             </p>
 
             <div className="home-actions">
@@ -64,38 +61,43 @@ function Home() {
                 Liên hệ
               </Link>
             </div>
-          </div>
+          </Reveal>
 
-          <aside className="home-spotlight glass-shell-strong">
-            <p className="section-kicker">Tổng quan</p>
-            <div className="home-spotlight-list">
-              {overviewItems.slice(0, 3).map((item) => (
-                <article key={item.title} className="home-spotlight-item">
-                  <FontAwesomeIcon icon={faCircleCheck} className="home-spotlight-icon" />
-                  <div>
-                    <h2>{item.title}</h2>
-                    <p>{item.description}</p>
-                  </div>
-                </article>
-              ))}
+          <Reveal className="home-hero__visual glass-shell-strong" delay={120}>
+            <div className="home-hero__summary">
+              <p className="section-kicker">Tổng quan</p>
+              <div className="home-hero__summary-list">
+                {overviewItems.slice(0, 3).map((item, index) => (
+                  <article key={item.title} className="home-hero__summary-item">
+                    <div className="home-hero__summary-index">0{index + 1}</div>
+                    <div>
+                      <h2>{item.title}</h2>
+                      <p>{item.description}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
             </div>
-          </aside>
+          </Reveal>
         </div>
       </section>
 
       <section className="home-section">
         <div className="home-container">
-          <div className="home-section__head section-copy">
+          <Reveal className="home-section__head section-copy">
             <p className="section-kicker">Tổng quan</p>
             <h2 className="section-title">Định hướng phát triển của Vietinnotech</h2>
-          </div>
+          </Reveal>
 
           <div className="home-overview-grid">
-            {overviewItems.map((item) => (
-              <article key={item.title} className="home-overview-card glass-shell">
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </article>
+            {overviewItems.map((item, index) => (
+              <Reveal key={item.title} delay={index * 90}>
+                <article className="home-overview-card glass-shell">
+                  <div className="home-overview-card__index">0{index + 1}</div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </article>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -103,26 +105,24 @@ function Home() {
 
       <section className="home-section">
         <div className="home-container">
-          <div className="home-solution glass-shell">
+          <Reveal className="home-solution glass-shell">
             <div className="section-copy">
               <p className="section-kicker">Giải pháp chính</p>
               <h2 className="section-title">Giải pháp phần mềm giáo dục tiên tiến của Vietinnotech</h2>
-              <p className="section-description">
-                Giải pháp OMO - Phòng học tích hợp Online và Offline.
-              </p>
+              <p className="section-description">Giải pháp OMO - Phòng học tích hợp Online và Offline.</p>
             </div>
 
             <Link to="/san-pham/phong-hoc-omo" className="home-button home-button--primary">
               Tìm hiểu giải pháp
               <FontAwesomeIcon icon={faArrowRight} />
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="home-section">
         <div className="home-container">
-          <div className="home-partners glass-shell">
+          <Reveal className="home-partners glass-shell">
             <div className="home-section__head section-copy">
               <p className="section-kicker">Đối tác giáo dục</p>
               <h2 className="section-title">Các đơn vị đã tin tưởng Vietinnotech</h2>
@@ -131,26 +131,36 @@ function Home() {
               </p>
             </div>
 
-            <div className="home-partner-grid" aria-label="Danh sách đối tác">
-              {partners.map((partner, index) => (
-                <div key={`${index}-${partner}`} className="home-partner-tile">
-                  <img src={partner} alt={`Đối tác ${index + 1}`} />
+            <div className="home-partner-marquee" aria-label="Danh sách đối tác">
+              <div className="home-partner-track">
+                <div className="home-partner-group">
+                  {partners.map((partner, index) => (
+                    <div key={`${index}-${partner}`} className="home-partner-tile">
+                      <img src={partner} alt={`Đối tác ${index + 1}`} loading="lazy" decoding="async" />
+                    </div>
+                  ))}
                 </div>
-              ))}
+
+                <div className="home-partner-group home-partner-group--clone" aria-hidden="true">
+                  {partnerLoop.map((partner, index) => (
+                    <div key={`clone-${index}-${partner}`} className="home-partner-tile">
+                      <img src={partner} alt="" loading="lazy" decoding="async" />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="home-section home-contact">
         <div className="home-container">
-          <div className="home-contact-panel glass-shell-strong">
+          <Reveal className="home-contact-panel glass-shell-strong">
             <div className="section-copy">
               <p className="section-kicker">Liên hệ</p>
               <h2 className="section-title">Kết nối với Vietinnotech</h2>
-              <p className="section-description">
-                Tầng 6, Tòa nhà 199 Bà Triệu, Hai Bà Trưng, TP Hà Nội
-              </p>
+              <p className="section-description">Tầng 6, Tòa nhà 199 Bà Triệu, Hai Bà Trưng, TP Hà Nội</p>
             </div>
 
             <div className="home-contact-meta">
@@ -163,7 +173,7 @@ function Home() {
                 <a href="tel:0906247699">0906 247 699</a>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
     </main>

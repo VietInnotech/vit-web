@@ -1,10 +1,6 @@
+import Reveal from "@/components/Reveal/Reveal";
+import { faArrowRight, faCalendarDays, faDisplay, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRight,
-  faCalendarDays,
-  faDisplay,
-  faUsers,
-} from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import PDFViewer from "../components/PDFViewer/PDFViewer";
 import "./PhongHocOMO.css";
@@ -31,13 +27,13 @@ function PhongHocOMO() {
   return (
     <main className="omo-detail-page page">
       <section className="omo-detail-hero glass-shell">
-        <div className="omo-detail-hero__copy">
+        <Reveal className="omo-detail-hero__copy">
           <p className="section-kicker">Giải pháp OMO</p>
           <h1 className="omo-detail-title">Phòng học tích hợp Online và Offline</h1>
           <p className="omo-detail-lead">
-            Giải pháp học tập kết hợp Online và Offline (OMO) dành cho các trường đại học, trường
-            cao đẳng và cơ sở giáo dục. Cung cấp nền tảng tích hợp để quản lý lớp học, bài giảng,
-            và tương tác học tập giữa giáo viên và học sinh.
+            Giải pháp học tập kết hợp Online và Offline (OMO) dành cho các trường đại học, trường cao đẳng và cơ sở giáo
+            dục. Cung cấp nền tảng tích hợp để quản lý lớp học, bài giảng, và tương tác học tập giữa giáo viên và học
+            sinh.
           </p>
 
           <div className="omo-detail-actions">
@@ -49,33 +45,37 @@ function PhongHocOMO() {
               Xem phần mềm OMO
             </Link>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="omo-detail-hero__panel glass-shell-strong">
-          {benefits.map((item) => (
-            <article key={item.title} className="omo-detail-card">
-              <FontAwesomeIcon icon={item.icon} className="omo-detail-card__icon" />
-              <div>
-                <h2>{item.title}</h2>
-                <p>{item.text}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+        <Reveal className="omo-detail-hero__panel glass-shell-strong" delay={120}>
+          <p className="omo-detail-hero__visual-kicker">Giải pháp OMO</p>
+
+          <div className="omo-detail-hero__benefits">
+            {benefits.map((item, index) => (
+              <article key={item.title} className="omo-detail-card" style={{ animationDelay: `${index * 80}ms` }}>
+                <FontAwesomeIcon icon={item.icon} className="omo-detail-card__icon" />
+                <div>
+                  <h2>{item.title}</h2>
+                  <p>{item.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </Reveal>
       </section>
 
       <section className="omo-detail-view glass-shell-strong">
-        <div className="omo-detail-view__head">
+        <Reveal className="omo-detail-view__head">
           <div>
             <p className="section-kicker">Catalogue</p>
             <h2 className="section-title">Tài liệu giới thiệu giải pháp OMO</h2>
           </div>
           <p className="omo-detail-view__hint">Nội dung catalogue được hiển thị trực tiếp bên dưới.</p>
-        </div>
+        </Reveal>
 
-        <div className="omo-detail-view__frame">
+        <Reveal className="omo-detail-view__frame" delay={120}>
           <PDFViewer src="/catalog/Catalogue_PhongHocOMO.pdf" />
-        </div>
+        </Reveal>
       </section>
     </main>
   );

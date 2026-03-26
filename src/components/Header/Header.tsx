@@ -1,13 +1,21 @@
 import "@/components/Header/Header.css";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
 import logo from "assets/logo.png";
+import { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Header() {
   const [navOpen, setNavOpen] = useState(false);
   const toggleNav = () => setNavOpen((s) => !s);
+
+  useEffect(() => {
+    document.body.classList.toggle("nav-open", navOpen);
+
+    return () => {
+      document.body.classList.remove("nav-open");
+    };
+  }, [navOpen]);
 
   return (
     <header className="navbar-section glass-shell">
@@ -37,18 +45,12 @@ export default function Header() {
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/phan-mem-omo"
-              className={({ isActive }) => `navbar-links${isActive ? " is-active" : ""}`}
-            >
+            <NavLink to="/phan-mem-omo" className={({ isActive }) => `navbar-links${isActive ? " is-active" : ""}`}>
               Phần mềm OMO
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/lien-he"
-              className={({ isActive }) => `navbar-links${isActive ? " is-active" : ""}`}
-            >
+            <NavLink to="/lien-he" className={({ isActive }) => `navbar-links${isActive ? " is-active" : ""}`}>
               Liên hệ
             </NavLink>
           </li>
@@ -61,11 +63,18 @@ export default function Header() {
         </Link>
       </div>
 
-      <button type="button" onClick={toggleNav} className="mobile-nav" aria-label="Mở menu">
-        <FontAwesomeIcon icon={faBars} className="hamb-icon" />
+      <button
+        type="button"
+        onClick={toggleNav}
+        className="mobile-nav"
+        aria-label={navOpen ? "Đóng menu" : "Mở menu"}
+        aria-expanded={navOpen}
+        aria-controls="mobile-navigation"
+      >
+        <FontAwesomeIcon icon={navOpen ? faXmark : faBars} className="hamb-icon" />
       </button>
 
-      <div className={navOpen ? "mobile-navbar open-nav glass-shell-strong" : "mobile-navbar"}>
+      <div id="mobile-navigation" className={navOpen ? "mobile-navbar open-nav glass-shell-strong" : "mobile-navbar"}>
         <div className="mobile-navbar-top">
           <Link to="/" className="navbar-title" onClick={toggleNav}>
             <div className="navbar-brand">
@@ -89,7 +98,11 @@ export default function Header() {
             </NavLink>
           </li>
           <li>
-            <NavLink onClick={toggleNav} to="/san-pham/phong-hoc-omo" className={({ isActive }) => (isActive ? "is-active" : "")}>
+            <NavLink
+              onClick={toggleNav}
+              to="/san-pham/phong-hoc-omo"
+              className={({ isActive }) => (isActive ? "is-active" : "")}
+            >
               Giải pháp OMO
             </NavLink>
           </li>

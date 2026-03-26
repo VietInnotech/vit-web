@@ -1,12 +1,6 @@
-import React from "react";
+import Reveal from "@/components/Reveal/Reveal";
+import { faArrowRight, faChartLine, faDisplay, faLock, faVideo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRight,
-  faChartLine,
-  faDisplay,
-  faLock,
-  faVideo,
-} from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import "./PhanMemOMO.css";
 
@@ -41,8 +35,7 @@ const features = [
   },
   {
     stt: 2,
-    feature:
-      'Tham gia 1 chạm: học viên bấm "Tham gia ngay" từ trang khóa học hoặc mục Lịch',
+    feature: 'Tham gia 1 chạm: học viên bấm "Tham gia ngay" từ trang khóa học hoặc mục Lịch',
   },
   {
     stt: 3,
@@ -55,8 +48,7 @@ const features = [
   },
   {
     stt: 5,
-    feature:
-      "Chế độ ghi: Server-side recording (SSR) tại SFU/MCU; ghi file MP4 (container ISO BMFF).",
+    feature: "Chế độ ghi: Server-side recording (SSR) tại SFU/MCU; ghi file MP4 (container ISO BMFF).",
   },
   {
     stt: 6,
@@ -104,8 +96,7 @@ const features = [
   },
   {
     stt: 15,
-    feature:
-      "Họp trực tuyến tích hợp: Zoom, Teams, Jitsi, Google Meet; hỗ trợ thảo luận nhóm/project-based learning",
+    feature: "Họp trực tuyến tích hợp: Zoom, Teams, Jitsi, Google Meet; hỗ trợ thảo luận nhóm/project-based learning",
   },
   {
     stt: 16,
@@ -114,8 +105,7 @@ const features = [
   },
   {
     stt: 17,
-    feature:
-      "Theo dõi tiến độ & cảnh báo: tự động đánh dấu hoàn thành, cảnh báo nếu chưa làm bài hoặc quá hạn",
+    feature: "Theo dõi tiến độ & cảnh báo: tự động đánh dấu hoàn thành, cảnh báo nếu chưa làm bài hoặc quá hạn",
   },
   {
     stt: 18,
@@ -124,11 +114,38 @@ const features = [
   },
 ];
 
+const featureGroups = [
+  {
+    kicker: "Vận hành lớp học",
+    title: "Lên lịch, tham gia và phối hợp dạy học",
+    summary: "Tập trung vào luồng thao tác hằng ngày của giáo viên và học viên.",
+    items: features.slice(0, 4),
+  },
+  {
+    kicker: "Ghi hình và lưu trữ",
+    title: "Tự động hóa nội dung sau buổi học",
+    summary: "Ghi hình, mã hóa, đồng bộ và phân phối nội dung theo cấu hình an toàn.",
+    items: features.slice(4, 9),
+  },
+  {
+    kicker: "Học liệu và tương tác",
+    title: "Giữ nhịp học tập xuyên suốt",
+    summary: "Lộ trình, nội dung, giao tiếp và họp trực tuyến nằm trong một nền tảng.",
+    items: features.slice(9, 15),
+  },
+  {
+    kicker: "Quản trị và an ninh",
+    title: "Định danh, phân quyền và kiểm soát",
+    summary: "Các quy tắc truy cập, ghi nhận và đồng bộ dữ liệu cho hệ thống lớn.",
+    items: features.slice(15, 18),
+  },
+];
+
 const PhanMemOMO: React.FC = () => {
   return (
     <main className="phan-mem-omo-page page">
       <section className="pmo-hero glass-shell">
-        <div className="pmo-hero__copy">
+        <Reveal className="pmo-hero__copy">
           <p className="section-kicker">Phần mềm OMO</p>
           <h1 className="pmo-title">Phần Mềm Giải Pháp OMO</h1>
           <p className="pmo-subtitle">Model: VIT_OMO_v2 - Nền tảng học tập kết hợp Online và Offline</p>
@@ -145,11 +162,15 @@ const PhanMemOMO: React.FC = () => {
               Liên hệ
             </Link>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="pmo-hero__grid">
-          {summaryCards.map((card) => (
-            <article key={card.title} className="pmo-summary-card glass-shell-strong">
+        <Reveal className="pmo-hero__stack" delay={120}>
+          {summaryCards.map((card, index) => (
+            <article
+              key={card.title}
+              className="pmo-summary-card glass-shell-strong"
+              style={{ animationDelay: `${index * 70}ms` }}
+            >
               <FontAwesomeIcon icon={card.icon} className="pmo-summary-icon" />
               <div>
                 <h2>{card.title}</h2>
@@ -157,53 +178,48 @@ const PhanMemOMO: React.FC = () => {
               </div>
             </article>
           ))}
-        </div>
+        </Reveal>
       </section>
 
       <section className="pmo-section">
-        <div className="overview-content glass-shell-strong">
+        <Reveal className="overview-content glass-shell-strong">
           <h2>Giới Thiệu Phần Mềm OMO</h2>
           <p>
-            Phần mềm OMO (Online &amp; Offline) là giải pháp giáo dục toàn diện được thiết kế đặc biệt
-            cho các trường đại học, cao đẳng và cơ sở giáo dục. Nó cung cấp các tính năng quản lý
-            lớp học, tổ chức buổi học trực tuyến, ghi hình tự động, quản lý tài liệu, và theo dõi
-            tiến độ học tập của học viên một cách toàn diện.
+            Phần mềm OMO (Online &amp; Offline) là giải pháp giáo dục toàn diện được thiết kế đặc biệt cho các trường
+            đại học, cao đẳng và cơ sở giáo dục. Nó cung cấp các tính năng quản lý lớp học, tổ chức buổi học trực tuyến,
+            ghi hình tự động, quản lý tài liệu, và theo dõi tiến độ học tập của học viên một cách toàn diện.
           </p>
-        </div>
-      </section>
-
-      <section className="pmo-section">
-        <div className="overview-grid">
-          {summaryCards.map((card) => (
-            <article key={card.title} className="overview-card glass-shell">
-              <div className="card-icon">
-                <FontAwesomeIcon icon={card.icon} />
-              </div>
-              <h3>{card.title}</h3>
-              <p>{card.text}</p>
-            </article>
-          ))}
-        </div>
+        </Reveal>
       </section>
 
       <section className="pmo-section">
         <div className="pmo-features">
-          <div className="section-copy">
+          <Reveal className="section-copy">
             <p className="section-kicker">Danh sách</p>
             <h2 className="section-title">18 Tính Năng</h2>
-          </div>
+          </Reveal>
 
-          <div className="features-table-wrapper glass-shell-strong">
-            <table className="features-table">
-              <tbody>
-                {features.map((item) => (
-                  <tr key={item.stt}>
-                    <td className="col-stt">{item.stt}</td>
-                    <td className="col-feature">{item.feature}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="pmo-feature-groups">
+            {featureGroups.map((group, groupIndex) => (
+              <Reveal key={group.title} delay={groupIndex * 100}>
+                <article className="pmo-feature-group glass-shell-strong">
+                  <div className="pmo-feature-group__head">
+                    <p className="section-kicker">{group.kicker}</p>
+                    <h3>{group.title}</h3>
+                    <p>{group.summary}</p>
+                  </div>
+
+                  <div className="pmo-feature-grid">
+                    {group.items.map((item, index) => (
+                      <div key={item.stt} className="pmo-feature-card" style={{ animationDelay: `${index * 70}ms` }}>
+                        <span className="pmo-feature-card__index">{String(item.stt).padStart(2, "0")}</span>
+                        <p>{item.feature}</p>
+                      </div>
+                    ))}
+                  </div>
+                </article>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>

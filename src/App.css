@@ -28,8 +28,7 @@
 
 html {
   scroll-behavior: smooth;
-  background:
-    radial-gradient(circle at top left, rgb(47 141 255 / 0.16), transparent 30%),
+  background: radial-gradient(circle at top left, rgb(47 141 255 / 0.16), transparent 30%),
     radial-gradient(circle at top right, rgb(139 92 246 / 0.18), transparent 28%),
     linear-gradient(160deg, var(--bg-0) 0%, var(--bg-1) 40%, var(--bg-2) 100%);
 }
@@ -40,11 +39,14 @@ body {
   min-height: 100vh;
   font-family: "Be Vietnam Pro", system-ui, sans-serif;
   color: var(--text);
-  background:
-    radial-gradient(circle at 15% 20%, rgb(47 141 255 / 0.15), transparent 18%),
+  background: radial-gradient(circle at 15% 20%, rgb(47 141 255 / 0.15), transparent 18%),
     radial-gradient(circle at 85% 10%, rgb(139 92 246 / 0.14), transparent 22%),
     linear-gradient(160deg, var(--bg-0) 0%, var(--bg-1) 42%, var(--bg-2) 100%);
   overflow-x: hidden;
+}
+
+body.nav-open {
+  overflow: hidden;
 }
 
 * {
@@ -142,4 +144,37 @@ select {
 
 .text-secondary {
   color: #c4b5fd;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition: opacity 700ms ease, transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

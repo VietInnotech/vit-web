@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import Reveal from "@/components/Reveal/Reveal";
+import { faClock, faLocationDot, faPaperPlane, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot, faPhone, faClock, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import type React from "react";
+import { useState } from "react";
 import "./LienHe.css";
 
 const contactPoints = [
@@ -47,12 +49,10 @@ const LienHe: React.FC = () => {
   return (
     <main className="contact-page page">
       <section className="contact-shell glass-shell-strong">
-        <div className="contact-copy">
+        <Reveal className="contact-copy">
           <p className="section-kicker">Liên hệ</p>
           <h1 className="contact-title">Liên Hệ Với Chúng Tôi</h1>
-          <p className="contact-lead">
-            Hãy để lại thông tin để chúng tôi có thể hỗ trợ bạn tốt nhất.
-          </p>
+          <p className="contact-lead">Hãy để lại thông tin để chúng tôi có thể hỗ trợ bạn tốt nhất.</p>
 
           <div className="contact-points">
             {contactPoints.map((item) => (
@@ -65,70 +65,72 @@ const LienHe: React.FC = () => {
               </article>
             ))}
           </div>
-        </div>
+        </Reveal>
 
-        <form className="contact-form glass-shell" onSubmit={handleSubmit}>
-          <div className="contact-form__head">
-            <p className="section-kicker">Gửi tin nhắn</p>
-            <h2>Gửi Tin Nhắn</h2>
-          </div>
+        <Reveal delay={120}>
+          <form className="contact-form glass-shell" onSubmit={handleSubmit}>
+            <div className="contact-form__head">
+              <p className="section-kicker">Gửi tin nhắn</p>
+              <h2>Gửi Tin Nhắn</h2>
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="name">Họ tên *</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              placeholder="Nhập họ tên của bạn"
-            />
-          </div>
+            <div className="form-group">
+              <label htmlFor="name">Họ tên *</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                placeholder="Nhập họ tên của bạn"
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="phone">Điện thoại</label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="Nhập số điện thoại"
-            />
-          </div>
+            <div className="form-group">
+              <label htmlFor="phone">Điện thoại</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Nhập số điện thoại"
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="subject">Tiêu đề *</label>
-            <input
-              type="text"
-              id="subject"
-              name="subject"
-              value={formData.subject}
-              onChange={handleChange}
-              required
-              placeholder="Chủ đề liên hệ"
-            />
-          </div>
+            <div className="form-group">
+              <label htmlFor="subject">Tiêu đề *</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                required
+                placeholder="Chủ đề liên hệ"
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="message">Nội dung *</label>
-            <textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              required
-              rows={6}
-              placeholder="Nhập tin nhắn của bạn..."
-            />
-          </div>
+            <div className="form-group">
+              <label htmlFor="message">Nội dung *</label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                rows={6}
+                placeholder="Nhập tin nhắn của bạn..."
+              />
+            </div>
 
-          <button type="submit" className="contact-submit">
-            <FontAwesomeIcon icon={faPaperPlane} />
-            Gửi tin nhắn
-          </button>
-        </form>
+            <button type="submit" className="contact-submit">
+              <FontAwesomeIcon icon={faPaperPlane} />
+              Gửi tin nhắn
+            </button>
+          </form>
+        </Reveal>
       </section>
     </main>
   );
