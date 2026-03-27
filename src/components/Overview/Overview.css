@@ -74,6 +74,12 @@
   background-color: #dce6ff;
   border-radius: 30px;
 }
+.info-card-image {
+  display: block;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
 .info-fa-icon {
   color: #2c96ff;
   font-size: 24px;

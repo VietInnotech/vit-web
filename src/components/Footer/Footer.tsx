@@ -1,5 +1,6 @@
 import "@/components/Footer/Footer.css";
 import logo from "assets/logo.png";
+import topcvLogo from "assets/nhSN501.svg";
 import { Link } from "react-router-dom";
 
 function Footer() {
@@ -17,7 +18,7 @@ function Footer() {
           <div className="ft-col">
             <p className="ft-list-title">LIÊN HỆ</p>
             <ul className="ft-list-items simple">
-              <li>Tầng 6, Tòa nhà 199 Bà Triệu, Hai Bà Trưng, TP Hà Nội</li>
+              <li>Tầng 7, Tòa nhà 199 Bà Triệu, Hai Bà Trưng, TP Hà Nội</li>
               <li>
                 <a href="tel:0906247699">0906 247 699</a>
               </li>
@@ -44,14 +45,12 @@ function Footer() {
             <ul className="ft-social-links">
               <li>
                 <a
-                  href="https://www.facebook.com/Vietinnotech"
-                  title="Facebook"
+                  href="https://www.topcv.vn/cong-ty/cong-ty-co-phan-vietinnotech/251610.html"
+                  title="Follow at TopCV"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                    <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
-                  </svg>
+                  <img src={topcvLogo} alt="TopCV logo" width="30" height="30" />
                 </a>
               </li>
             </ul>

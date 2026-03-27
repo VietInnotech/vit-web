@@ -1,9 +1,15 @@
-function PartnerCard(props: any) {
+type PartnerCardProps = {
+  img: string;
+  name?: string;
+  title?: string;
+};
+
+function PartnerCard({ img, name, title }: PartnerCardProps) {
   return (
     <div className="dt-card">
-      <img src={props.img} alt={props.name} className="dt-card-img" />
-      <p className="dt-card-name">{props.name}</p>
-      <p className="dt-card-title">{props.title}</p>
+      <img src={img} alt={name ?? "Partner logo"} className="dt-card-img" />
+      {name ? <p className="dt-card-name">{name}</p> : null}
+      {title ? <p className="dt-card-title">{title}</p> : null}
     </div>
   );
 }

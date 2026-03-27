@@ -160,13 +160,13 @@ function Home() {
             <div className="section-copy">
               <p className="section-kicker">Liên hệ</p>
               <h2 className="section-title">Kết nối với Vietinnotech</h2>
-              <p className="section-description">Tầng 6, Tòa nhà 199 Bà Triệu, Hai Bà Trưng, TP Hà Nội</p>
+              <p className="section-description">Tầng 7, Tòa nhà 199 Bà Triệu, Hai Bà Trưng, TP Hà Nội</p>
             </div>
 
             <div className="home-contact-meta">
               <div className="home-contact-item">
                 <FontAwesomeIcon icon={faLocationDot} />
-                <span>Tầng 6, Tòa nhà 199 Bà Triệu, Hai Bà Trưng, TP Hà Nội</span>
+                <span>Tầng 7, Tòa nhà 199 Bà Triệu, Hai Bà Trưng, TP Hà Nội</span>
               </div>
               <div className="home-contact-item">
                 <FontAwesomeIcon icon={faPhone} />

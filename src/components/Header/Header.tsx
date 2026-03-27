@@ -57,12 +57,6 @@ export default function Header() {
         </ul>
       </nav>
 
-      <div className="navbar-cta">
-        <Link to="/lien-he" className="navbar-btn">
-          Nhận tư vấn
-        </Link>
-      </div>
-
       <button
         type="button"
         onClick={toggleNav}
